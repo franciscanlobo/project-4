@@ -22,6 +22,11 @@
   </head>
 
   <body>
+    <audio autoplay>
+      <source src="assets/audio/hogwarts-theme.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
     <div class="header">
       <nav class="navbar navbar-expand-lg w-100 fixed-top">
         <div class="container-fluid justify-content-center">
@@ -38,6 +43,7 @@
 
     <div
       class="hero-section d-flex align-items-center justify-content-center text-center"
+      id="Home"
     >
       <div class="hero-content p-5">
         <h1 class="fw-bold display-2 mb-3">Hogwarts Compendium</h1>
@@ -46,7 +52,7 @@
           href="#Characters"
           class="characters-btn btn btn-dark px-5 py-2 mt-2"
         >
-          See Characters
+          Explore Characters
         </a>
       </div>
     </div>
@@ -55,7 +61,61 @@
       <h1 class="display-4 text-center"></h1>
     </div>
 
-    <div id="Characters" class="container my-5 pt-5">
+    <div id="Houses" class="container my-5 pt-3">
+      <h2 class="fw-bold mb-4 text-center">Houses</h2>
+      <div class="row text-center">
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img
+              src="assets/images/gryffindor.png"
+              class="card-img-top"
+              alt="Gryffindor"
+              style="background-color: #460303"
+            />
+          </div>
+          <button class="house-btn gryffindor w-100 p-3">Gryffindor</button>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img
+              src="assets/images/slytherin.png"
+              class="card-img-top"
+              alt="Gryffindor"
+              style="background-color: #0b3d2e"
+            />
+          </div>
+          <button class="house-btn slytherin w-100 p-3">Slytherin</button>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img
+              src="assets/images/ravenclaw.png"
+              class="card-img-top"
+              alt="Gryffindor"
+              style="background-color: #070220"
+            />
+          </div>
+          <button class="house-btn ravenclaw w-100 p-3">Ravenclaw</button>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img
+              src="assets/images/hufflepuff.png"
+              class="card-img-top"
+              alt="Gryffindor"
+              style="background-color: #eee117"
+            />
+          </div>
+          <button class="house-btn hufflepuff w-100 p-3">Hufflepuff</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="Characters" class="container my-5 pt-3">
+      <h2 class="fw-bold mb-4 text-center">Characters</h2>
       <div class="row" id="contents"></div>
     </div>
 
@@ -72,45 +132,97 @@
       };
 
       async function loadCharacters() {
-        const response = await fetch(API_URL);
-        const data = await response.json();
+        try {
+          const response = await fetch(API_URL);
+          const data = await response.json();
 
-        contents.innerHTML = "";
+          // Filter out characters without images
+          const charactersWithImages = data.filter(
+            (character) => character.image && character.image.trim() !== ""
+          );
 
-        data.forEach((character) => {
-          const house = character.house || "Unknown";
-          const cardColor = houseColors[house] || houseColors.Unknown;
+          contents.innerHTML = "";
 
-          contents.innerHTML += `
-      <div class="col-12 col-md-6 col-lg-4">
-        <div
-          class="card my-3 shadow p-4 rounded-4 text-center"
-          style="border-top: 10px solid ${cardColor};"
-        >
+          charactersWithImages.forEach((character) => {
+            const house = character.house || "Unknown";
+            const cardColor = houseColors[house] || houseColors.Unknown;
 
-          <img 
-            src="${character.image || "https://via.placeholder.com/200"}"
-            class="mx-auto mb-3 rounded"
-            style="height:200px; object-fit:cover;"
-          >
+            contents.innerHTML += `
+              <div class="col-12 col-md-6 col-lg-3">
+                <div
+                  class="card my-3 shadow p-4 rounded-4 text-center"
+                  style="border-top: 8px solid ${cardColor};"
+                >
+      
+                  <img 
+                    src="${character.image}"
+                    class="mx-auto mb-3 rounded"
+                    style="height:200px; object-fit:cover;"
+                  >
+      
+                  <h5 class="fw-bold">${character.name}</h5>
+      
+                  <p class="mb-1"><strong>House:</strong> ${house}</p>
+                  
+                </div>
+              </div>
+            `;
+          });
 
-          <h5 class="fw-bold">${character.name}</h5>
-
-          <p class="mb-1">
-            <strong>House:</strong> ${house}
-          </p>
-
-          <p class="mb-0">
-            <strong>Actor:</strong> ${character.actor || "N/A"}
-          </p>
-
-        </div>
-      </div>
-    `;
-        });
+          console.log(
+            `Loaded ${charactersWithImages.length} characters with images.`
+          );
+        } catch (error) {
+          console.error("Failed to load characters:", error);
+          contents.innerHTML =
+            "<p>Failed to load characters. Please try again later.</p>";
+        }
       }
 
       loadCharacters();
+
+      function loadHouse(houseName) {
+        const url = `https://hp-api.onrender.com/api/characters/house/${houseName}`;
+
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            contents.innerHTML = "";
+
+            const charactersWithImages = data.filter(
+              (c) => c.image && c.image.trim() !== ""
+            );
+
+            charactersWithImages.forEach((character) => {
+              const house = character.house || "Unknown";
+              const cardColor = houseColors[house] || houseColors.Unknown;
+
+              contents.innerHTML += `
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card my-3 shadow p-4 rounded-4 text-center"
+                 style="border-top: 8px solid ${cardColor};">
+
+              <img src="${character.image}"
+                   class="mx-auto mb-3 rounded"
+                   style="height:200px; object-fit:cover;">
+
+              <h5 class="fw-bold">${character.name}</h5>
+              <p class="mb-1"><strong>House:</strong> ${house}</p>
+            </div>
+          </div>
+        `;
+            });
+          });
+      }
+
+      document.querySelector(".gryffindor").onclick = () =>
+        loadHouse("gryffindor");
+      document.querySelector(".slytherin").onclick = () =>
+        loadHouse("slytherin");
+      document.querySelector(".ravenclaw").onclick = () =>
+        loadHouse("ravenclaw");
+      document.querySelector(".hufflepuff").onclick = () =>
+        loadHouse("hufflepuff");
     </script>
 
     <script
