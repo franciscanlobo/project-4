@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hogwarts Compendium</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/harry potter logo.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <nav class="navbar navbar-expand-lg w-100 fixed-top">
+        <div class="container-fluid justify-content-center">
+          <a class="navbar-brand" href="#Home">
+            <img
+              src="assets/images/harry-potter-logo.png"
+              alt="Hogwarts Compendium"
+              class="logo"
+            />
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div
+      class="hero-section d-flex align-items-center justify-content-center text-center"
+    >
+      <div class="hero-content p-5">
+        <h1 class="fw-bold display-2 mb-3">Hogwarts Compendium</h1>
+        <p class="mb-4 fs-5">Your Ultimate Guide to the Wizarding World</p>
+        <a
+          href="#Characters"
+          class="characters-btn btn btn-dark px-5 py-2 mt-2"
+        >
+          See Characters
+        </a>
+      </div>
+    </div>
+
+    <div class="container my-4">
+      <h1 class="display-4 text-center"></h1>
+    </div>
+
+    <div class="container">
+      <div class="row" id="contents"></div>
+    </div>
+
+    <!-- <script>
+      const colors = {
+        fire: "#FDDFDF",
+        grass: "#DEFDE0",
+        electric: "#FCF7DE",
+        water: "#DEF3FD",
+        ground: "#f4e7da",
+        rock: "#d5d5d4",
+      };
+
+      var contents = document.getElementById("contents");
+
+      const getPokemon = async () => {
+        for (var i = 1; i <= 50; i++) {
+          const response = await fetch("https://hp-api.onrender.com" + i);
+          const pokemon = await response.json();
+
+          var pokemonType = pokemon.types[0].type.name;
+
+          contents.innerHTML +=
+            `
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card my-3 shadow p-5 rounded-5 text-center">
+                <div class="mx-auto rounded-circle" style="width: 200px; height: 200px; background-color: ` +
+            colors[pokemonType] +
+            `;">
+                  <img src="` +
+            pokemon.sprites.versions["generation-iv"]["heartgold-soulsilver"]
+              .front_default +
+            `" class="w-100">
+                </div>
+                <div class="my-3 h4">
+                  #` +
+            pokemon.id +
+            ` ` +
+            pokemon.name +
+            `
+                </div>
+                <div class="my-3 rounded-5 border py-2">
+                  ` +
+            pokemonType +
+            `
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      };
+
+      getPokemon();
+    </script> -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
