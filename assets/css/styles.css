@@ -57,3 +57,7 @@ body {
   transform: scale(1.05);
   text-decoration: underline;
 }
+
+#Characters {
+  scroll-margin-top: 100px;
+}

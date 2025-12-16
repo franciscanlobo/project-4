@@ -8,7 +8,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="assets/images/harry potter logo.png"
+      href="assets/images/harry-potter-logo.png"
     />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -55,61 +55,63 @@
       <h1 class="display-4 text-center"></h1>
     </div>
 
-    <div class="container">
+    <div id="Characters" class="container my-5 pt-5">
       <div class="row" id="contents"></div>
     </div>
 
-    <!-- <script>
-      const colors = {
-        fire: "#FDDFDF",
-        grass: "#DEFDE0",
-        electric: "#FCF7DE",
-        water: "#DEF3FD",
-        ground: "#f4e7da",
-        rock: "#d5d5d4",
+    <script>
+      const contents = document.getElementById("contents");
+      const API_URL = "https://hp-api.onrender.com/api/characters";
+
+      const houseColors = {
+        Gryffindor: "#7F0909",
+        Slytherin: "#0B3D2E",
+        Ravenclaw: "#0E1A40",
+        Hufflepuff: "#EEE117",
+        Unknown: "#cccccc",
       };
 
-      var contents = document.getElementById("contents");
+      async function loadCharacters() {
+        const response = await fetch(API_URL);
+        const data = await response.json();
 
-      const getPokemon = async () => {
-        for (var i = 1; i <= 50; i++) {
-          const response = await fetch("https://hp-api.onrender.com" + i);
-          const pokemon = await response.json();
+        contents.innerHTML = "";
 
-          var pokemonType = pokemon.types[0].type.name;
+        data.forEach((character) => {
+          const house = character.house || "Unknown";
+          const cardColor = houseColors[house] || houseColors.Unknown;
 
-          contents.innerHTML +=
-            `
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card my-3 shadow p-5 rounded-5 text-center">
-                <div class="mx-auto rounded-circle" style="width: 200px; height: 200px; background-color: ` +
-            colors[pokemonType] +
-            `;">
-                  <img src="` +
-            pokemon.sprites.versions["generation-iv"]["heartgold-soulsilver"]
-              .front_default +
-            `" class="w-100">
-                </div>
-                <div class="my-3 h4">
-                  #` +
-            pokemon.id +
-            ` ` +
-            pokemon.name +
-            `
-                </div>
-                <div class="my-3 rounded-5 border py-2">
-                  ` +
-            pokemonType +
-            `
-                </div>
-              </div>
-            </div>
-          `;
-        }
-      };
+          contents.innerHTML += `
+      <div class="col-12 col-md-6 col-lg-4">
+        <div
+          class="card my-3 shadow p-4 rounded-4 text-center"
+          style="border-top: 10px solid ${cardColor};"
+        >
 
-      getPokemon();
-    </script> -->
+          <img 
+            src="${character.image || "https://via.placeholder.com/200"}"
+            class="mx-auto mb-3 rounded"
+            style="height:200px; object-fit:cover;"
+          >
+
+          <h5 class="fw-bold">${character.name}</h5>
+
+          <p class="mb-1">
+            <strong>House:</strong> ${house}
+          </p>
+
+          <p class="mb-0">
+            <strong>Actor:</strong> ${character.actor || "N/A"}
+          </p>
+
+        </div>
+      </div>
+    `;
+        });
+      }
+
+      loadCharacters();
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
