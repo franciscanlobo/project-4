@@ -75,3 +75,40 @@ body {
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
+
+.house-btn:hover {
+  background-color: #d3a611;
+  color: black;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+.ending-banner {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  color: #f5f5f5;
+
+  background-image: url("../images/ending-picture.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.ending-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.footer-content {
+  background-color: #070220;
+  color: #f5f5f5;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
