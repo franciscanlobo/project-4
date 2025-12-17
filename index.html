@@ -22,11 +22,6 @@
   </head>
 
   <body>
-    <audio autoplay>
-      <source src="assets/audio/hogwarts-theme.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-
     <div class="header">
       <nav class="navbar navbar-expand-lg w-100 fixed-top">
         <div class="container-fluid justify-content-center">
@@ -41,6 +36,10 @@
       </nav>
     </div>
 
+    <audio id="bgMusic">
+      <source src="assets/audio/hogwarts-theme.mp3" type="audio/mpeg" />
+    </audio>
+
     <div
       class="hero-section d-flex align-items-center justify-content-center text-center"
       id="Home"
@@ -49,8 +48,9 @@
         <h1 class="fw-bold display-2 mb-3">Hogwarts Compendium</h1>
         <p class="mb-4 fs-5">Your Ultimate Guide to the Wizarding World</p>
         <a
-          href="#Characters"
+          href="#Content"
           class="characters-btn btn btn-dark px-5 py-2 mt-2"
+          id="playButton"
         >
           Explore Characters
         </a>
@@ -61,7 +61,7 @@
       <h1 class="display-4 text-center"></h1>
     </div>
 
-    <div id="Houses" class="container my-5 pt-3">
+    <div id="Content" class="container my-5 pt-3">
       <h2 class="fw-bold mb-4 text-center">Houses</h2>
       <div class="row text-center">
         <div class="col-6 col-md-3">
@@ -114,10 +114,19 @@
       </div>
     </div>
 
-    <div id="Characters" class="container my-5 pt-3">
+    <div class="container my-5 pt-3">
       <h2 class="fw-bold mb-4 text-center">Characters</h2>
       <div class="row" id="contents"></div>
     </div>
+
+    <script>
+      const music = document.getElementById("bgMusic");
+      const button = document.getElementById("playButton");
+
+      button.addEventListener("click", () => {
+        music.play();
+      });
+    </script>
 
     <script>
       const contents = document.getElementById("contents");
