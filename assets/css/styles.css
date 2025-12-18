@@ -42,7 +42,8 @@ body {
   padding: 0 20px;
 }
 
-.characters-btn {
+.characters-btn,
+.house-btn {
   background-color: rgba(0, 0, 0, 0.65);
   color: white;
   border: none;
@@ -71,7 +72,7 @@ body {
 .house-btn {
   background-color: rgba(0, 0, 0, 0.65);
   color: white;
-  width: 250px;
+  width: 2 50px;
   border: none;
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;

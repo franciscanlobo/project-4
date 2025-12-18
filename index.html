@@ -47,215 +47,49 @@
       <div class="hero-content p-5">
         <h1 class="fw-bold display-2 mb-3">Hogwarts Compendium</h1>
         <p class="mb-4 fs-5">Your Ultimate Guide to the Wizarding World</p>
-        <a
+        <!-- <a
           href="#Content"
           class="characters-btn btn btn-dark px-5 py-2 mt-2"
           id="playButton"
         >
           Explore Characters
-        </a>
+        </a> -->
       </div>
     </div>
 
-    <div id="Content" class="container my-5 pt-3">
-      <h2 class="fw-bold text-center">Houses</h2>
-      <h5 class="fw-light mb-4 text-center">
-        Sort your characters based on their corresponding houses
-      </h5>
+    <div class="container overview p-5">
+      <h2 class="about fw-bold text-center">About Hogwarts Compendium</h2>
+      <p class="about-text fw-light mb-4 text-center">
+        Dive into the enchanting world of Hogwarts with our comprehensive
+        compendium. Discover detailed profiles of your favorite characters,
+        their magical abilities, house affiliations, and much more. Whether
+        you're a Gryffindor brave at heart or a cunning Slytherin, our
+        collection has something for every witch and wizard. Start your magical
+        journey today!
+      </p>
 
       <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="house-card text-center">
-            <img
-              src="assets/images/gryffindor.png"
-              class="card-img-top p-3"
-              alt="Gryffindor"
-              style="background-color: #460303"
-            />
-            <div class="card-body p-0">
-              <button class="house-btn gryffindor py-3" data-house="Gryffindor">
-                Gryffindor
-              </button>
-            </div>
-          </div>
+        <div class="col-12 col-md-6">
+          <a
+            href="characters.html"
+            class="characters-btn btn btn-dark px-5 py-2 mt-2"
+            id="playButton"
+          >
+            Explore Characters
+          </a>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="house-card text-center">
-            <img
-              src="assets/images/slytherin.png"
-              class="card-img-top p-3"
-              alt="Slytherin"
-              style="background-color: #0b3d2e"
-            />
-            <div class="card-body p-0">
-              <button class="house-btn slytherin py-3" data-house="Slytherin">
-                Slytherin
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="house-card text-center">
-            <img
-              src="assets/images/ravenclaw.png"
-              class="card-img-top p-3"
-              alt="Ravenclaw"
-              style="background-color: #070220"
-            />
-            <div class="card-body p-0">
-              <button class="house-btn ravenclaw py-3" data-house="Ravenclaw">
-                Ravenclaw
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="house-card text-center">
-            <img
-              src="assets/images/hufflepuff.png"
-              class="card-img-top p-3"
-              alt="Hufflepuff"
-              style="background-color: #eee117"
-            />
-            <div class="card-body p-0">
-              <button class="house-btn hufflepuff py-3" data-house="Hufflepuff">
-                Hufflepuff
-              </button>
-            </div>
-          </div>
+        <div class="col-12 col-md-6">
+          <a
+            href="spells.html"
+            class="spells-btn btn btn-dark px-5 py-2 mt-2"
+            id="playButton"
+          >
+            Explore Spells
+          </a>
         </div>
       </div>
     </div>
-
-    <div class="container my-5 pt-3">
-      <h2 class="fw-bold mb-4 text-center">Characters</h2>
-      <div class="row" id="contents"></div>
-    </div>
-
-    <div class="ending-banner d-flex"></div>
-
-    <footer>
-      <div class="footer-content text-center p-4">
-        <p class="mb-0">
-          &copy; 2024 Hogwarts Compendium. All rights reserved.
-        </p>
-      </div>
-    </footer>
-
-    <script>
-      const music = document.getElementById("bgMusic");
-      const button = document.getElementById("playButton");
-
-      button.addEventListener("click", () => {
-        music.play();
-      });
-    </script>
-
-    <script>
-      const contents = document.getElementById("contents");
-      const API_URL = "https://hp-api.onrender.com/api/characters";
-
-      const houseColors = {
-        Gryffindor: "#7F0909",
-        Slytherin: "#0B3D2E",
-        Ravenclaw: "#0E1A40",
-        Hufflepuff: "#EEE117",
-        Unknown: "#cccccc",
-      };
-
-      async function loadCharacters() {
-        try {
-          const response = await fetch(API_URL);
-          const data = await response.json();
-
-          const charactersWithImages = data.filter(
-            (character) => character.image && character.image.trim() !== ""
-          );
-
-          contents.innerHTML = "";
-
-          charactersWithImages.forEach((character) => {
-            const house = character.house || "Unknown";
-            const cardColor = houseColors[house] || houseColors.Unknown;
-
-            contents.innerHTML += `
-              <div class="col-12 col-md-6 col-lg-3">
-                <div
-                  class="card my-3 shadow p-4 rounded-4 text-center"
-                  style="border-top: 8px solid ${cardColor};"
-                >
-      
-                  <img 
-                    src="${character.image}"
-                    class="mx-auto mb-3 rounded"
-                    style="height:200px; object-fit:cover;"
-                  >
-      
-                  <h5 class="fw-bold">${character.name}</h5>
-      
-                  <p class="mb-1"><strong>House:</strong> ${house}</p>
-                  
-                </div>
-              </div>
-            `;
-          });
-
-          console.log(
-            `Loaded ${charactersWithImages.length} characters with images.`
-          );
-        } catch (error) {
-          console.error("Failed to load characters:", error);
-          contents.innerHTML =
-            "<p>Failed to load characters. Please try again later.</p>";
-        }
-      }
-
-      loadCharacters();
-
-      function loadHouse(houseName) {
-        const url = `https://hp-api.onrender.com/api/characters/house/${houseName}`;
-
-        fetch(url)
-          .then((res) => res.json())
-          .then((data) => {
-            contents.innerHTML = "";
-
-            const charactersWithImages = data.filter(
-              (c) => c.image && c.image.trim() !== ""
-            );
-
-            charactersWithImages.forEach((character) => {
-              const house = character.house || "Unknown";
-              const cardColor = houseColors[house] || houseColors.Unknown;
-
-              contents.innerHTML += `
-          <div class="col-12 col-md-6 col-lg-3">
-            <div class="card my-3 shadow p-4 rounded-4 text-center"
-                 style="border-top: 8px solid ${cardColor};">
-
-              <img src="${character.image}"
-                   class="mx-auto mb-3 rounded"
-                   style="height:200px; object-fit:cover;">
-
-              <h5 class="fw-bold">${character.name}</h5>
-              <p class="mb-1"><strong>House:</strong> ${house}</p>
-            </div>
-          </div>
-        `;
-            });
-          });
-      }
-
-      document.querySelectorAll(".house-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const house = btn.dataset.house;
-          loadHouse(house);
-        });
-      });
-    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
