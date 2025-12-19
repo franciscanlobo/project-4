@@ -22,7 +22,29 @@
   </head>
 
   <body>
-    <div id="Content" class="container my-5 pt-3">
+    <div class="header">
+      <nav class="navbar navbar-expand-lg w-100">
+        <div class="container-fluid justify-content-center">
+          <div class="col">
+            <a class="navbar-brand" href="#Home">
+              <img
+                src="assets/images/harry-potter-logo.png"
+                alt="Hogwarts Compendium"
+                class="logo"
+              />
+            </a>
+          </div>
+
+          <div class="col text-end">
+            <a href="index.html">
+              <button class="back-btn btn px-4">Back</button>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="Content" class="container pt-5">
       <h2 class="fw-bold text-center">Houses</h2>
       <h5 class="fw-light mb-4 text-center">
         Sort your characters based on their corresponding houses
@@ -38,7 +60,10 @@
               style="background-color: #460303"
             />
             <div class="card-body p-0">
-              <button class="house-btn gryffindor py-3" data-house="Gryffindor">
+              <button
+                class="house-btn gryffindor-btn py-3"
+                data-house="Gryffindor"
+              >
                 Gryffindor
               </button>
             </div>
@@ -54,7 +79,10 @@
               style="background-color: #0b3d2e"
             />
             <div class="card-body p-0">
-              <button class="house-btn slytherin py-3" data-house="Slytherin">
+              <button
+                class="house-btn slytherin-btn py-3"
+                data-house="Slytherin"
+              >
                 Slytherin
               </button>
             </div>
@@ -70,7 +98,10 @@
               style="background-color: #070220"
             />
             <div class="card-body p-0">
-              <button class="house-btn ravenclaw py-3" data-house="Ravenclaw">
+              <button
+                class="house-btn ravenclaw-btn py-3"
+                data-house="Ravenclaw"
+              >
                 Ravenclaw
               </button>
             </div>
@@ -86,7 +117,10 @@
               style="background-color: #eee117"
             />
             <div class="card-body p-0">
-              <button class="house-btn hufflepuff py-3" data-house="Hufflepuff">
+              <button
+                class="house-btn hufflepuff-btn py-3"
+                data-house="Hufflepuff"
+              >
                 Hufflepuff
               </button>
             </div>
@@ -99,25 +133,6 @@
       <h2 class="fw-bold mb-4 text-center">Characters</h2>
       <div class="row" id="contents"></div>
     </div>
-
-    <div class="ending-banner d-flex"></div>
-
-    <footer>
-      <div class="footer-content text-center p-4">
-        <p class="mb-0">
-          &copy; 2024 Hogwarts Compendium. All rights reserved.
-        </p>
-      </div>
-    </footer>
-
-    <script>
-      const music = document.getElementById("bgMusic");
-      const button = document.getElementById("playButton");
-
-      button.addEventListener("click", () => {
-        music.play();
-      });
-    </script>
 
     <script>
       const contents = document.getElementById("contents");
@@ -148,24 +163,26 @@
 
             contents.innerHTML += `
                 <div class="col-12 col-md-6 col-lg-3">
-                  <div
-                    class="card my-3 shadow p-4 rounded-4 text-center"
-                    style="border-top: 8px solid ${cardColor};"
-                  >
-        
-                    <img 
-                      src="${character.image}"
-                      class="mx-auto mb-3 rounded"
-                      style="height:200px; object-fit:cover;"
+                <div class="character-card shadow my-4 text-center">
+
+                    <div class="img-wrapper">
+                    <img
+                        src="${character.image}"
+                        alt="${character.name}"
+                        class="character-img"
+                        style="--house-color: ${cardColor};"
                     >
-        
-                    <h5 class="fw-bold">${character.name}</h5>
-        
-                    <p class="mb-1"><strong>House:</strong> ${house}</p>
-                    
-                  </div>
+                    </div>
+
+                    <h5 class="character-name fw-bold mt-3">${character.name}</h5>
+
+                    <span class="house-badge" style="--house-color: ${cardColor};">
+                    ${house}
+                    </span>
+
                 </div>
-              `;
+                </div>
+            `;
           });
 
           console.log(
@@ -197,19 +214,27 @@
               const cardColor = houseColors[house] || houseColors.Unknown;
 
               contents.innerHTML += `
-            <div class="col-12 col-md-6 col-lg-3">
-              <div class="card my-3 shadow p-4 rounded-4 text-center"
-                   style="border-top: 8px solid ${cardColor};">
-  
-                <img src="${character.image}"
-                     class="mx-auto mb-3 rounded"
-                     style="height:200px; object-fit:cover;">
-  
-                <h5 class="fw-bold">${character.name}</h5>
-                <p class="mb-1"><strong>House:</strong> ${house}</p>
-              </div>
-            </div>
-          `;
+                <div class="col-12 col-md-6 col-lg-3">
+                <div class="character-card shadow my-4 text-center">
+
+                    <div class="img-wrapper">
+                    <img
+                        src="${character.image}"
+                        alt="${character.name}"
+                        class="character-img"
+                        style="--house-color: ${cardColor};"
+                    >
+                    </div>
+
+                    <h5 class="character-name fw-bold mt-3">${character.name}</h5>
+
+                    <span class="house-badge" style="--house-color: ${cardColor};">
+                    ${house}
+                    </span>
+
+                </div>
+                </div>
+             `;
             });
           });
       }
@@ -221,5 +246,17 @@
         });
       });
     </script>
+
+    <script src="assets/js/audio.js"></script>
+
+    <audio id="bgMusic">
+      <source src="assets/audio/hogwarts-theme.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

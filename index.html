@@ -23,7 +23,7 @@
 
   <body>
     <div class="header">
-      <nav class="navbar navbar-expand-lg w-100 fixed-top">
+      <nav class="navbar navbar-expand-lg w-100">
         <div class="container-fluid justify-content-center">
           <a class="navbar-brand" href="#Home">
             <img
@@ -36,10 +36,6 @@
       </nav>
     </div>
 
-    <audio id="bgMusic">
-      <source src="assets/audio/hogwarts-theme.mp3" type="audio/mpeg" />
-    </audio>
-
     <div
       class="hero-section d-flex align-items-center justify-content-center text-center"
       id="Home"
@@ -47,49 +43,55 @@
       <div class="hero-content p-5">
         <h1 class="fw-bold display-2 mb-3">Hogwarts Compendium</h1>
         <p class="mb-4 fs-5">Your Ultimate Guide to the Wizarding World</p>
-        <!-- <a
-          href="#Content"
-          class="characters-btn btn btn-dark px-5 py-2 mt-2"
-          id="playButton"
-        >
-          Explore Characters
-        </a> -->
       </div>
     </div>
 
     <div class="container overview p-5">
       <h2 class="about fw-bold text-center">About Hogwarts Compendium</h2>
-      <p class="about-text fw-light mb-4 text-center">
+
+      <p class="about-text mb-4 text-center">
         Dive into the enchanting world of Hogwarts with our comprehensive
         compendium. Discover detailed profiles of your favorite characters,
-        their magical abilities, house affiliations, and much more. Whether
-        you're a Gryffindor brave at heart or a cunning Slytherin, our
-        collection has something for every witch and wizard. Start your magical
-        journey today!
+        their magical abilities, house affiliations, and much more.
       </p>
 
-      <div class="row g-4">
+      <p class="lore fw-bold my-5 text-center">
+        Compiled from Hogwarts records and wizarding archives.
+      </p>
+
+      <div class="houses mb-5">
+        <span class="house gryffindor" title="Gryffindor"></span>
+        <span class="house slytherin" title="Slytherin"></span>
+        <span class="house ravenclaw" title="Ravenclaw"></span>
+        <span class="house hufflepuff" title="Hufflepuff"></span>
+      </div>
+
+      <div class="row g-4 justify-content-center text-center">
         <div class="col-12 col-md-6">
-          <a
-            href="characters.html"
-            class="characters-btn btn btn-dark px-5 py-2 mt-2"
-            id="playButton"
-          >
+          <a href="characters.html" class="characters-btn btn w-100 play-audio">
             Explore Characters
           </a>
         </div>
 
         <div class="col-12 col-md-6">
-          <a
-            href="spells.html"
-            class="spells-btn btn btn-dark px-5 py-2 mt-2"
-            id="playButton"
-          >
+          <a href="spells.html" class="spells-btn btn w-100 play-audio">
             Explore Spells
           </a>
         </div>
       </div>
     </div>
+
+    <div class="ending-banner d-flex"></div>
+
+    <footer>
+      <div class="footer-content text-center p-4">
+        <p class="mb-0">
+          &copy; 2024 Hogwarts Compendium. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/js/audio.js"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
