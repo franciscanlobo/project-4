@@ -179,30 +179,30 @@ body {
 }
 
 .spell-card {
-  background-color: #f8f5ff;
+  background-color: #111;
   border-radius: 1.5rem;
   padding: 1.8rem 1.2rem;
   border-top: 6px solid var(--spell-color);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 15px rgba(160, 160, 160, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .spell-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 35px rgba(226, 203, 74, 0.856);
 }
 
 .spell-name {
   font-weight: 600;
   font-size: 1.2rem;
-  color: #2a2a2a;
+  color: #f5f5f5;
 }
 
 .spell-description {
   font-weight: 400;
   font-size: 0.95rem;
-  color: #444;
+  color: #f5f5f5;
   margin-top: 0.25rem;
   line-height: 1.4;
 }
